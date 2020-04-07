@@ -28,12 +28,29 @@ nb2 = length(df_femmes)
 
 # Question : Les femmes ont été privilégiés lors du naufrage.
 # Hypothèse H0 : les femmes n'ont pas été privilégiés / H1  :les femmes ont été privilégiés
-# Test utilisé : comparaison de moyennes de 2 échantillons indépendants
-# Conditions : les données suivent une loi Normale, le nombre d'échantillons > 30 : ok
+# Test utilisé : Test de comparaison à une proportion
+?prop.test
 
 prop.test(nb2, nb1, p = 0.5, alternative = "greater",
           correct = F)
 
 res <- prop.test(nb2, nb1, p = 0.5, alternative = "greater",
                       correct = F)
-?prop.test
+
+# Affichage de la p-value
+res$p.value
+# Affichage de la moyenne
+res$estimate
+# Affichage de l'intervalle de confiance
+res$conf.int
+# Affichage de la t value de Student
+res$statistic
+
+
+# Retours : la différence entre les 2 moyennes n'est pas nulle
+# Statistique de Pearson = 44.95906 
+# p-value est le degré de significativité du test = 1.005984e-11
+# L'intervalle de confiance de la moyenne à 95% est indiqué
+#
+# p-value = 1.005984e-11 - Ce qui est largement inférieur à 0.05.
+# On rejette l'hypothèse 0 et on conclut que les femmes ont été privilégiés lors du naufrage.
