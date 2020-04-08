@@ -21,27 +21,14 @@ df_survivants <- data.frame(df[ which(df$Survived == 1), ])
 df <- df[ , - 1]
 df_survivants <- df_survivants[ , - 1]
 
-#calcul des moyennes et ecart type et nb d'elements
-m1 = mean(df)
-m2 = mean(df_survivants)
-
-std1 = sd(df)
-std2 = sd(df_survivants)
-
-nb1 = length(df)
-nb2 = length(df_survivants)
-
 # Question : Le prix du billet a une influence sur la survie d'un passager.
 # Hypothèse H0 : le prix du billet a une influence / H1  :le prix du billet a une influence.
 # Test utilisé : comparaison de moyennes de 2 échantillons indépendants
 # Conditions : les données suivent une loi Normale, le nombre d'échantillons > 30 : ok
 
-# Création des 2 jeux représentatifs
-jeu1 <- rnorm(n=nb1,mean=m1,sd=std1)
-jeu2 <- rnorm(n=nb2,mean=m2,sd=std2)
-
+# Test de Student
 ?t.test
-t.test(jeu1, jeu2)
+t.test(df, df_survivants)
 # Affichage des résultats par valeur :
 res <- t.test(jeu1, jeu2)
 # Affichage de la p-value
@@ -56,12 +43,12 @@ res$parameter
 res$statistic
 
 # Retours : la différence entre les 2 moyennes n'est pas nulle
-# Statistique de Student = -6.120036
-# Degré de liberté = 487
-# p-value est le degré de significativité du test = 1.924927e-09
+# Statistique de Student = -5.598963 
+# Degré de liberté = 480
+# p-value est le degré de significativité du test = 3.632247e-08
 # L'intervalle de confiance de la moyenne à 95% est indiqué
 #
-# p-value = 1.924927e-09 - Ce qui est largement inférieur à 0.05.
+# p-value = 3.632247e-08 - Ce qui est largement inférieur à 0.05.
 # On rejette l'hypothèse 0 et on conclut que 
 # le prix du billet a une influence sur la survie d'un passager.
 
